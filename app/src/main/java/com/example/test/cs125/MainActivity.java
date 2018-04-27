@@ -28,25 +28,9 @@ import android.widget.Button;
 import com.google.gson.JsonObject;
 
 import java.io.Serializable;
-import java.util.Locale;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 
 public class MainActivity extends AppCompatActivity implements Serializable{
-    /** Request queue for our API requests. */
-    private static RequestQueue requestQueue;
-
     private EditText write;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

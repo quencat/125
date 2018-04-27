@@ -1,5 +1,6 @@
 package com.example.test.cs125;
 
+import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -24,29 +25,27 @@ public class Main2Activity extends AppCompatActivity {
         final ImageButton save = findViewById(R.id.Save);
         final ImageButton share = findViewById(R.id.Share);
         final ImageButton Return = findViewById(R.id.Return);
-
-        /* click listener*/
-        /*play button*/
+        /*playbutton*/
         final String passed = getIntent().getExtras().getString("key","null");
-        Toast.makeText(getApplicationContext(), "TEST" + passed, Toast.LENGTH_SHORT).show();
-
-
         ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 ttobj.setLanguage(Locale.ENGLISH);
             }
         });
+        Return.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                Toast.makeText(getApplicationContext(), "Another One!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Main2Activity.this, MainActivity.class));
+            }
+        });
         play.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(final View v) {
                 String toSpeak = passed;
                 Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                 ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
-
-
     }
     public void onPause(){
         if(ttobj !=null){
