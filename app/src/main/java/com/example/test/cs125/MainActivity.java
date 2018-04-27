@@ -1,6 +1,7 @@
 package com.example.test.cs125;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,7 +14,20 @@ import android.speech.tts.TextToSpeech;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import com.google.gson.JsonObject;
+
+import java.io.Serializable;
 import java.util.Locale;
 
 import com.android.volley.Request;
@@ -25,40 +39,30 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Serializable{
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
 
     private EditText write;
-    TextToSpeech ttobj;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextInputEditText ed = findViewById(R.id.Input);
-        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                ttobj.setLanguage(Locale.ENGLISH);
-            }
-        });
+
         final Button enter = findViewById(R.id.enter);
         enter.setText("Enter");
         enter.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                String toSpeak = ed.getText().toString();
-                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
                 enter.setText("Clicked");
-                ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                String pass = ed.getText().toString();
+                Intent i = new Intent(MainActivity.this, Main2Activity.class);
+                i.putExtra("key", pass);
+                startActivity(i);
             }
         });
-    }
-    public void onPause() {
-        if (ttobj != null) {
-            ttobj.stop();
-            ttobj.shutdown();
-        }
-        super.onPause();
     }
 }
