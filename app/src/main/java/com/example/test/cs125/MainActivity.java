@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         final Button enter = findViewById(R.id.enter);
+        enter.setText("Enter");
         enter.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 String toSpeak = ed.getText().toString();
                 Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                enter.setText("clicked");
+                enter.setText("Clicked");
                 ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
@@ -60,9 +61,4 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onPause();
     }
-
-    void startAPICall() {
-
-    }
-
 }
