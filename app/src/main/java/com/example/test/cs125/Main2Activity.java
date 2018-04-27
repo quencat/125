@@ -10,23 +10,23 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
 
 public class Main2Activity extends AppCompatActivity {
     TextToSpeech ttobj = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         final ImageButton play = findViewById(R.id.Play);
-        final ImageButton save = findViewById(R.id.Save);
-        final ImageButton share = findViewById(R.id.Share);
         final ImageButton Return = findViewById(R.id.Return);
+        final TextView Words = findViewById(R.id.Words);
         /*playbutton*/
         final String passed = getIntent().getExtras().getString("key","null");
+        Words.setText(passed);
         ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
