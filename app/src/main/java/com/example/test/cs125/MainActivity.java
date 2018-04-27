@@ -30,15 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private static RequestQueue requestQueue;
 
     private EditText write;
-/*comment*/
-
+    TextToSpeech ttobj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final TextInputEditText ed = findViewById(R.id.Input);
-        final TextToSpeech ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 ttobj.setLanguage(Locale.ENGLISH);
@@ -53,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
                 ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
+    }
+    public void onPause() {
+        if (ttobj != null) {
+            ttobj.stop();
+            ttobj.shutdown();
+        }
+        super.onPause();
     }
 
     void startAPICall() {

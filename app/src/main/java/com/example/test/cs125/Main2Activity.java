@@ -18,7 +18,6 @@ public class Main2Activity extends AppCompatActivity {
         final ImageButton save = findViewById(R.id.Save);
         final ImageButton share = findViewById(R.id.Share);
         final ImageButton Return = findViewById(R.id.Return);
-        final ProgressBar progress = findViewById(R.id.progressBar);
 
     }
 }
