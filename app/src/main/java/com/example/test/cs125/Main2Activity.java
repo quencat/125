@@ -23,6 +23,8 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         final ImageButton play = findViewById(R.id.Play);
+        final ImageButton play2 = findViewById(R.id.Play2);
+        final ImageButton play3 = findViewById(R.id.Play3);
         final ImageButton Return = findViewById(R.id.Return);
         final TextView Words = findViewById(R.id.Words);
         /*playbutton*/
@@ -54,7 +56,30 @@ public class Main2Activity extends AppCompatActivity {
                     float set = tone[i % tone.length];
                     ttobj.setPitch(set);
                     String toSpeak = list[i];
-                    Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                    ttobj.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+                }
+            }
+        });
+        play2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                final String[] list = passed.split(" ");
+                for (int i = 0; i < list.length; i++) {
+                    Random pitch = new Random();
+                    final float set = pitch.nextFloat();
+                    ttobj.setPitch(set);
+                    String toSpeak = list[i];
+                    ttobj.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+                }
+            }
+        });
+        play3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View v) {
+                final String[] list = passed.split(" ");
+                final float[] tone = {10.f, 0.0f, 10f, 2f, 0.0f, 10f, 10f, 0.5f, 0.7f, 1.0f};
+                for (int i = 0; i < list.length; i++) {
+                    float set = tone[i % tone.length];
+                    ttobj.setPitch(set);
+                    String toSpeak = list[i];
                     ttobj.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
                 }
             }
