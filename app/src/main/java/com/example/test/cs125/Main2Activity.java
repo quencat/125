@@ -47,9 +47,11 @@ public class Main2Activity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 final String[] list = passed.split(" ");
+                final float[] tone = {0.1f, 2.2f, 0.3f, 4.4f, 0.5f, 6.6f, 0.7f, 8.8f, 0.9f, 11.0f};
                 for (int i = 0; i < list.length; i++) {
-                    Random pitch = new Random();
-                    final float set = pitch.nextFloat();
+                    /*Random pitch = new Random();
+                    final float set = pitch.nextFloat();*/
+                    float set = tone[i % tone.length];
                     ttobj.setPitch(set);
                     String toSpeak = list[i];
                     Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
