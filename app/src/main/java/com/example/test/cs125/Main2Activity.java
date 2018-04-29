@@ -29,19 +29,15 @@ public class Main2Activity extends AppCompatActivity {
         final String passed = getIntent().getExtras().getString("key","null");
         Words.setText(passed);
 
-        final String[] list = passed.split(" ");
-        for (int i = 0; i < list.length; i++) {
-            Random pitch = new Random();
-            final float set = pitch.nextFloat();
-            ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-                @Override
-                public void onInit(int status) {
-                    ttobj.setLanguage(Locale.ENGLISH);
-                    ttobj.setPitch(set);
-                }
 
-            });
-        }
+        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                ttobj.setLanguage(Locale.ENGLISH);
+
+            }
+
+        });
         Return.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 Toast.makeText(getApplicationContext(), "Another One!", Toast.LENGTH_SHORT).show();
@@ -50,9 +46,15 @@ public class Main2Activity extends AppCompatActivity {
         });
         play.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
-                String toSpeak = passed;
-                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                ttobj.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+                final String[] list = passed.split(" ");
+                for (int i = 0; i < list.length; i++) {
+                    Random pitch = new Random();
+                    final float set = pitch.nextFloat();
+                    ttobj.setPitch(set);
+                    String toSpeak = list[i];
+                    Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                    ttobj.speak(toSpeak, TextToSpeech.QUEUE_ADD, null);
+                }
             }
         });
     }
