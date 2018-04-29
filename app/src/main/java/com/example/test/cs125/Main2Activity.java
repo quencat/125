@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Locale;
+import java.util.Random;
 
 public class Main2Activity extends AppCompatActivity {
     TextToSpeech ttobj = null;
@@ -27,12 +28,20 @@ public class Main2Activity extends AppCompatActivity {
         /*playbutton*/
         final String passed = getIntent().getExtras().getString("key","null");
         Words.setText(passed);
-        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                ttobj.setLanguage(Locale.ENGLISH);
-            }
-        });
+
+        final String[] list = passed.split(" ");
+        for (int i = 0; i < list.length; i++) {
+            Random pitch = new Random();
+            final float set = pitch.nextFloat();
+            ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    ttobj.setLanguage(Locale.ENGLISH);
+                    ttobj.setPitch(set);
+                }
+
+            });
+        }
         Return.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 Toast.makeText(getApplicationContext(), "Another One!", Toast.LENGTH_SHORT).show();
