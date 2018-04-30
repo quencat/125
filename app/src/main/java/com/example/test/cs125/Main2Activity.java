@@ -72,7 +72,7 @@ public class Main2Activity extends AppCompatActivity {
         play3.setOnClickListener(new View.OnClickListener() {
             public void onClick(final View v) {
                 final String[] list = passed.split(" ");
-                final float[] tone = {10.f, 0.0f, 10f, 2f, 0.0f, 10f, 10f, 0.5f, 0.7f, 1.0f};
+                final float[] tone = {10.f, 0.1f, 10f, 2f, 0.0f, 10f, 10f, 0.5f, 0.7f, 1.0f};
                 for (int i = 0; i < list.length; i++) {
                     float set = tone[i % tone.length];
                     ttobj.setPitch(set);
